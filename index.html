@@ -22,12 +22,24 @@
           <option value="fr">Français</option>
           <option value="ht">Kreyòl</option>
         </select>
-        <a id="menu-store" class="btn" href="#store">Store</a>
-        <a id="menu-services" class="btn" href="services.html">Services</a>
-        <a id="menu-contact" class="btn" href="contact.html">Contact</a>
-        <div id="user" class="user" style="display:none"></div>
-        <button id="login" class="btn primary">Sign in</button>
-        <button id="logout" class="btn" style="display:none">Sign out</button>
+
+        <div class="menu-wrap">
+          <button class="btn menu-btn" id="menu-toggle" aria-haspopup="true" aria-expanded="false">
+            Menu
+            <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+
+          <div class="dropdown" id="menu-dropdown" role="menu" aria-label="Main menu">
+            <a id="menu-store" href="#store" role="menuitem">Store</a>
+            <a id="menu-services" href="services.html" role="menuitem">Services</a>
+            <a id="menu-contact" href="contact.html" role="menuitem">Contact</a>
+            <div class="sep"></div>
+            <button id="login" class="primary" role="menuitem">Sign in</button>
+            <button id="register" role="menuitem">Register</button>
+            <button id="logout" style="display:none" role="menuitem">Sign out</button>
+            <div id="user" class="user" style="display:none;padding:8px 12px"></div>
+          </div>
+        </div>
       </div>
     </nav>
 

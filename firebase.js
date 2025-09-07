@@ -1,5 +1,3 @@
-
-// Firebase v9 modular SDK — client-side (public) config placeholders:
 const firebaseConfig = {
   apiKey: "YOUR_API_KEY",
   authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
@@ -18,35 +16,28 @@ async function initFirebase(){
 
   const loginBtn = document.getElementById('login');
   const logoutBtn = document.getElementById('logout');
+  const registerBtn = document.getElementById('register');
   const userBox = document.getElementById('user');
 
-  if(loginBtn){
-    loginBtn.addEventListener('click', async ()=>{
-      try{
-        await signInWithPopup(auth, provider);
-      }catch(e){ alert('Login failed: '+e.message); }
-    });
-  }
-  if(logoutBtn){
-    logoutBtn.addEventListener('click', async ()=>{
-      await signOut(auth);
-    });
-  }
+  async function doLogin(){ try{ await signInWithPopup(auth, provider);}catch(e){ alert('Auth failed: '+e.message);} }
+  if(loginBtn) loginBtn.addEventListener('click', doLogin);
+  if(registerBtn) registerBtn.addEventListener('click', doLogin);
+  if(logoutBtn) logoutBtn.addEventListener('click', async ()=>{ await signOut(auth); });
+
   onAuthStateChanged(auth, (user)=>{
     const gated = document.querySelectorAll('[data-require-auth]');
     if(user){
       [...gated].forEach(el=> el.removeAttribute('disabled'));
-      if(userBox){
-        userBox.innerHTML = `<img src="${user.photoURL||''}" alt=""> <span>${user.displayName||user.email}</span>`;
-        userBox.style.display = 'flex';
-      }
-      if(loginBtn) loginBtn.style.display = 'none';
-      if(logoutBtn) logoutBtn.style.display = 'inline-flex';
+      if(userBox){ userBox.innerHTML = `<img src="${user.photoURL||''}" alt=""> <span>${user.displayName||user.email}</span>`; userBox.style.display='flex'; }
+      if(loginBtn) loginBtn.style.display='none';
+      if(registerBtn) registerBtn.style.display='none';
+      if(logoutBtn) logoutBtn.style.display='inline-flex';
     }else{
       [...gated].forEach(el=> el.setAttribute('disabled','true'));
-      if(userBox){ userBox.style.display = 'none'; userBox.innerHTML = ''; }
-      if(loginBtn) loginBtn.style.display = 'inline-flex';
-      if(logoutBtn) logoutBtn.style.display = 'none';
+      if(userBox){ userBox.style.display='none'; userBox.innerHTML=''; }
+      if(loginBtn) loginBtn.style.display='inline-flex';
+      if(registerBtn) registerBtn.style.display='inline-flex';
+      if(logoutBtn) logoutBtn.style.display='none';
     }
   });
 }

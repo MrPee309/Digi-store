@@ -5,32 +5,37 @@ let LANG = localStorage.getItem('lang') || 'en';
 async function loadI18n(){
   const r = await fetch('i18n.json'); STRINGS = await r.json();
   applyLang();
-  document.getElementById('lang').value = LANG;
-  document.getElementById('lang').addEventListener('change', (e)=>{
-    LANG = e.target.value;
-    localStorage.setItem('lang', LANG);
-    applyLang();
-  });
+  const sel = document.getElementById('lang');
+  if(sel){ sel.value = LANG; sel.addEventListener('change', (e)=>{
+    LANG = e.target.value; localStorage.setItem('lang', LANG); applyLang();
+  });}
 }
 function t(key){ return (STRINGS[LANG] && STRINGS[LANG][key]) || key; }
 function applyLang(){
-  const map = {
-    '.instant': 'instant','.hero_badge':'hero_badge','.hero_title':'hero_title','.hero_p':'hero_p',
-    '.how-title':'how', '#menu-store':'menu_store', '#menu-services':'menu_services', '#menu-contact':'menu_contact',
-    '#search::ph':'search_ph', '#refund-link':'refund', '#how-link':'how_to_pay',
-    '#login':'login', '#logout':'logout', '.footer-a':'footer_a', '.legal-title':'legal', '.help-title':'help'
-  };
+  const map = { '.instant':'instant', '#menu-store':'menu_store', '#menu-services':'menu_services', '#menu-contact':'menu_contact' };
   for(const [sel,key] of Object.entries(map)){
-    if(sel.endsWith('::ph')){
-      const s = sel.replace('::ph',''); const el = document.querySelector(s);
-      if(el) el.placeholder = t(key);
-    }else{
-      document.querySelectorAll(sel).forEach(el=> el.innerHTML = t(key));
-    }
+    document.querySelectorAll(sel).forEach(el=> el.innerHTML = t(key));
   }
-  // Buttons inside cards
+  const ph = document.getElementById('search'); if(ph) ph.placeholder = (STRINGS[LANG] && STRINGS[LANG]['search_ph']) || 'Search…';
+  // Button texts inside cards
   document.querySelectorAll('[data-i18n="buy"]').forEach(el=> el.textContent = t('buy'));
   document.querySelectorAll('[data-i18n="more"]').forEach(el=> el.textContent = t('more'));
+  // Auth labels in dropdown
+  const login = document.getElementById('login'); if(login) login.textContent = t('login');
+  const reg = document.getElementById('register'); if(reg) reg.textContent = t('register');
+  const logout = document.getElementById('logout'); if(logout) logout.textContent = t('logout');
+  document.querySelectorAll('.hero_badge').forEach(el=> el.innerHTML = t('hero_badge'));
+  document.querySelectorAll('.hero_title').forEach(el=> el.innerHTML = t('hero_title'));
+  document.querySelectorAll('.hero_p').forEach(el=> el.innerHTML = t('hero_p'));
+  document.querySelectorAll('.how-title').forEach(el=> el.innerHTML = t('how'));
+  document.querySelectorAll('.how_1').forEach(el=> el.innerHTML = t('how_1'));
+  document.querySelectorAll('.how_2').forEach(el=> el.innerHTML = t('how_2'));
+  document.querySelectorAll('.how_3').forEach(el=> el.innerHTML = t('how_3'));
+  const hl = document.getElementById('how-link'); if(hl) hl.textContent = t('how_to_pay');
+  const rl = document.getElementById('refund-link'); if(rl) rl.textContent = t('refund');
+  document.querySelectorAll('.footer-a').forEach(el=> el.innerHTML = t('footer_a'));
+  document.querySelectorAll('.legal-title').forEach(el=> el.innerHTML = t('legal'));
+  document.querySelectorAll('.help-title').forEach(el=> el.innerHTML = t('help'));
 }
 
 async function loadProducts(){
@@ -39,7 +44,7 @@ async function loadProducts(){
   const grid = document.querySelector('.grid');
   const filter = document.getElementById('search');
   render(items, '');
-  filter.addEventListener('input', ()=> render(items, filter.value.toLowerCase()));
+  if(filter) filter.addEventListener('input', ()=> render(items, filter.value.toLowerCase()));
   function render(list, term){
     grid.innerHTML = '';
     list.filter(p => !term || p.title.toLowerCase().includes(term) || p.tags.join(' ').toLowerCase().includes(term))
@@ -58,7 +63,7 @@ async function loadProducts(){
       <div class="tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
       <p class="desc">${p.description}</p>
       <div class="actions">
-        <a class="btn primary buy" data-require-auth href="${p.buy_url}" target="_blank" rel="noopener" data-i18n="buy">Buy now</a>
+        <a class="btn primary" href="${p.buy_url}" target="_blank" rel="noopener" data-i18n="buy" data-require-auth>Buy now</a>
         <button class="btn" data-id="${p.id}" data-i18n="more">More info</button>
       </div>
     `;
@@ -80,4 +85,15 @@ function openModal(p){
 }
 function closeModal(){ document.querySelector('.modal').classList.remove('open'); }
 
-window.addEventListener('DOMContentLoaded', ()=>{ loadI18n(); loadProducts(); });
+// Dropdown behavior
+function setupDropdown(){
+  const btn = document.getElementById('menu-toggle');
+  const dd = document.getElementById('menu-dropdown');
+  if(!btn || !dd) return;
+  function close(){ dd.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+  btn.addEventListener('click', (e)=>{ e.stopPropagation(); dd.classList.toggle('open'); btn.setAttribute('aria-expanded', dd.classList.contains('open')?'true':'false'); });
+  document.addEventListener('click', (e)=>{ if(!dd.contains(e.target) && e.target!==btn){ close(); } });
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+}
+
+window.addEventListener('DOMContentLoaded', ()=>{ loadI18n(); loadProducts(); setupDropdown(); });

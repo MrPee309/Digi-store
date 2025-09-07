@@ -10,17 +10,28 @@
     <nav class="nav">
       <div class="brand"><a href="index.html"><img src="assets/logo.svg" alt="DigiMart"></a></div>
       <div class="right">
-        <a class="btn" href="index.html">Store</a>
-        <div id="user" class="user" style="display:none"></div>
-        <button id="login" class="btn primary">Sign in</button>
-        <button id="logout" class="btn" style="display:none">Sign out</button>
+        <div class="menu-wrap">
+          <button class="btn menu-btn" id="menu-toggle" aria-haspopup="true" aria-expanded="false">Menu
+            <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <div class="dropdown" id="menu-dropdown" role="menu">
+            <a id="menu-store" href="index.html#store" role="menuitem">Store</a>
+            <a id="menu-services" href="services.html" role="menuitem">Services</a>
+            <a id="menu-contact" href="contact.html" role="menuitem">Contact</a>
+            <div class="sep"></div>
+            <button id="login" class="primary" role="menuitem">Sign in</button>
+            <button id="register" role="menuitem">Register</button>
+            <button id="logout" style="display:none" role="menuitem">Sign out</button>
+            <div id="user" class="user" style="display:none;padding:8px 12px"></div>
+          </div>
+        </div>
       </div>
     </nav>
 
     <section class="hero" style="grid-template-columns:1fr">
       <div class="panel">
         <h2>Connected services</h2>
-        <p class="small">Example: call your provider API through a secure Vercel Function proxy. Configure env vars as shown in README.</p>
+        <p class="small">Example: call your provider API through a secure Vercel Function proxy. Configure env vars in Vercel.</p>
         <form id="svc" class="kicker">
           <input class="select" style="min-width:220px" name="imei" placeholder="Enter IMEI / code / user id" required>
           <button class="btn primary" type="submit" data-require-auth>Run service</button>
@@ -30,14 +41,14 @@
     </section>
   </div>
 
+  <script src="scripts.js"></script>
   <script src="firebase.js"></script>
   <script>
   document.getElementById('svc').addEventListener('submit', async (e)=>{
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.target));
     const res = await fetch('/api/proxy', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data)});
-    const out = document.getElementById('out');
-    out.textContent = await res.text();
+    document.getElementById('out').textContent = await res.text();
   });
   </script>
 </body>
