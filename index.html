@@ -3,8 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>DigiMart Right Menu</title>
+  <title>DigiMart — Digital goods, email delivery</title>
+  <link rel="icon" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://images.unsplash.com">
   <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="Instant digital products delivered straight to your email — fast, secure, and hassle-free.">
 </head>
 <body>
   <div class="container">
@@ -14,38 +17,116 @@
         <span class="badge instant"><span class="dot"></span> Instant email delivery</span>
       </div>
       <div class="right">
-        <select id="lang" class="select">
+        <select id="lang" class="select" aria-label="Language">
           <option value="en">English</option>
           <option value="fr">Français</option>
           <option value="ht">Kreyòl</option>
         </select>
+
         <div class="menu-wrap">
-          <button class="btn menu-btn" id="menu-toggle">Menu
-            <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2"/></svg>
+          <button class="btn menu-btn" id="menu-toggle" aria-haspopup="true" aria-expanded="false">
+            Menu
+            <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
           </button>
-          <div class="dropdown" id="menu-dropdown">
-            <a href="#store">Store</a>
-            <a href="services.html">Services</a>
-            <a href="contact.html">Contact</a>
+
+          <div class="dropdown" id="menu-dropdown" role="menu" aria-label="Main menu">
+            <a id="menu-store" href="#store" role="menuitem">Store</a>
+            <a id="menu-services" href="services.html" role="menuitem">Services</a>
+            <a id="menu-contact" href="contact.html" role="menuitem">Contact</a>
             <div class="sep"></div>
-            <button id="login" class="primary">Sign in</button>
-            <button id="register">Register</button>
-            <button id="logout" style="display:none">Sign out</button>
+            <button id="login" class="primary" role="menuitem">Sign in</button>
+            <button id="register" role="menuitem">Register</button>
+            <button id="logout" style="display:none" role="menuitem">Sign out</button>
             <div id="user" class="user" style="display:none;padding:8px 12px"></div>
           </div>
         </div>
       </div>
     </nav>
+
+    <section class="hero">
+      <div>
+        <div class="badge hero_badge">100% Digital • No shipping • No customs</div>
+        <h1 class="hero_title">Your digital shop for <span style="color:var(--brand)">codes & keys</span>, delivered <i>by email only</i>.</h1>
+        <p class="hero_p">Microsoft Office, VPNs, Canva templates, gift cards, and more. Pay — receive email — done.</p>
+        <div class="panel small">
+          <strong class="how-title">How it works</strong>
+          <ul>
+            <li class="how_1">Select a product and click <b>Buy now</b>.</li>
+            <li class="how_2">Complete payment on Gumroad/Payhip or your chosen method.</li>
+            <li class="how_3">Receive the code/file automatically by email.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="small">Note: Replace sample product links with your own (Gumroad/Payhip/crypto).</div>
+        <div class="small">Buying requires login — protects from fraud and lets you track orders.</div>
+      </div>
+    </section>
+
+    <div class="marquee" aria-hidden="true">
+      🔐 Software keys • 🎮 Digital codes • 🎨 Canva templates • 🎧 Subscriptions • 🎁 Gift cards • 🌐 VPN • 🧰 Creator tools
+    </div>
+
+    <section id="store">
+      <div class="filters">
+        <div class="search"><input id="search" placeholder="Search…" /></div>
+        <a id="how-link" class="btn" href="how-to-pay.html">How to pay?</a>
+        <a id="refund-link" class="btn" href="refund.html">Refund Policy</a>
+      </div>
+      <div class="grid"></div>
+    </section>
+
+    <footer>
+      <div>
+        <strong>DigiMart</strong><br>
+        <span class="footer-a">Digital store • Email delivery only</span><br>
+        <div class="small">© <span id="y"></span> DigiMart.</div>
+      </div>
+      <div>
+        <strong class="legal-title">Legal</strong><br>
+        <a href="terms.html">Terms of Use</a><br>
+        <a href="privacy.html">Privacy Policy</a><br>
+        <a href="refund.html">Refunds</a>
+      </div>
+      <div>
+        <strong class="help-title">Help</strong><br>
+        <a href="how-to-pay.html">How to pay?</a><br>
+        <a href="contact.html">Contact</a>
+      </div>
+    </footer>
   </div>
-  <script>
+
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3 class="modal-title">Product</h3>
+        <button class="btn" onclick="closeModal()">Close</button>
+      </div>
+      <div class="modal-body"></div>
+      <div class="modal-actions">
+        <a class="btn primary modal-buy" target="_blank" rel="noopener" data-require-auth>Buy now</a>
+        <button class="btn" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+  <script src="scripts.js"></script>
+  <script src="firebase.js"></script>
+<script>
+(function(){
   function setupDropdown(){
-    const btn=document.getElementById('menu-toggle');
-    const dd=document.getElementById('menu-dropdown');
-    if(!btn||!dd) return;
-    btn.addEventListener('click',e=>{e.stopPropagation();dd.classList.toggle('open');});
-    document.addEventListener('click',e=>{if(!dd.contains(e.target)&&e.target!==btn){dd.classList.remove('open');}});
+    var btn = document.getElementById('menu-toggle');
+    var dd  = document.getElementById('menu-dropdown');
+    if(!btn || !dd) return;
+    function close(){ dd.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+    btn.addEventListener('click', function(e){ e.stopPropagation(); dd.classList.toggle('open');
+      btn.setAttribute('aria-expanded', dd.classList.contains('open') ? 'true' : 'false'); });
+    document.addEventListener('click', function(e){ if(!dd.contains(e.target) && e.target!==btn) close(); });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
   }
-  window.addEventListener('DOMContentLoaded',setupDropdown);
-  </script>
+  window.addEventListener('DOMContentLoaded', setupDropdown);
+})();
+</script>
 </body>
 </html>
