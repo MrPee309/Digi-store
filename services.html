@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Services — DigiMart</title>
+  <link rel="stylesheet" href="styles.css"><link rel="icon" href="assets/favicon.svg">
+</head>
+<body>
+  <div class="container">
+    <nav class="nav">
+      <div class="brand"><a href="index.html"><img src="assets/logo.svg" alt="DigiMart"></a></div>
+      <div class="right">
+        <a class="btn" href="index.html">Store</a>
+        <div id="user" class="user" style="display:none"></div>
+        <button id="login" class="btn primary">Sign in</button>
+        <button id="logout" class="btn" style="display:none">Sign out</button>
+      </div>
+    </nav>
+
+    <section class="hero" style="grid-template-columns:1fr">
+      <div class="panel">
+        <h2>Connected services</h2>
+        <p class="small">Example: call your provider API through a secure Vercel Function proxy. Configure env vars as shown in README.</p>
+        <form id="svc" class="kicker">
+          <input class="select" style="min-width:220px" name="imei" placeholder="Enter IMEI / code / user id" required>
+          <button class="btn primary" type="submit" data-require-auth>Run service</button>
+        </form>
+        <pre id="out" class="panel" style="overflow:auto;white-space:pre-wrap;margin-top:16px"></pre>
+      </div>
+    </section>
+  </div>
+
+  <script src="firebase.js"></script>
+  <script>
+  document.getElementById('svc').addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(e.target));
+    const res = await fetch('/api/proxy', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data)});
+    const out = document.getElementById('out');
+    out.textContent = await res.text();
+  });
+  </script>
+</body>
+</html>
