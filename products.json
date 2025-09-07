@@ -1,0 +1,57 @@
+[
+  {
+    "id": "office-key",
+    "title": "Microsoft Office 2021 Pro Plus \u2013 1 PC Key",
+    "description": "Kle orijinal pou aktive Office 2021 Pro Plus (Word, Excel, PowerPoint, Outlook). Livrezon otomatik pa imel.",
+    "price": 24.99,
+    "old_price": 59.99,
+    "tags": [
+      "Software",
+      "Windows",
+      "Key"
+    ],
+    "buy_url": "https://gum.co/your-office-key",
+    "image": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop"
+  },
+  {
+    "id": "vpn-1y",
+    "title": "VPN Premium \u2013 12 mwa (k\u00f2d aktivasyon)",
+    "description": "Aks\u00e8 VPN rapid ak sekirize, k\u00f2d aktivasyon resevwa pa imel (kompatib ak Windows, Mac, Android, iOS).",
+    "price": 19.0,
+    "old_price": 39.0,
+    "tags": [
+      "VPN",
+      "Sekirite",
+      "Multiplatform"
+    ],
+    "buy_url": "https://payhip.com/b/your-vpn-code",
+    "image": "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?q=80&w=1200&auto=format&fit=crop"
+  },
+  {
+    "id": "canva-templates",
+    "title": "Pack 120 Templates Canva (IG, CV, Prezantasyon)",
+    "description": "Pak mod\u00e8l Canva pare pou itilize: CV, istwa IG, mod\u00e8l prezantasyon. Telechajman imedya pa imel.",
+    "price": 12.0,
+    "old_price": 29.0,
+    "tags": [
+      "Template",
+      "Canva",
+      "Design"
+    ],
+    "buy_url": "https://gum.co/your-canva-pack",
+    "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop"
+  },
+  {
+    "id": "netflix-gift",
+    "title": "Netflix Gift Balance \u2013 25$ (K\u00f2d dijital)",
+    "description": "K\u00f2d kado Netflix 25$ (rejyon US). Livrezon pa imel imedya.",
+    "price": 25.0,
+    "old_price": 32.0,
+    "tags": [
+      "Gift Card",
+      "Netflix"
+    ],
+    "buy_url": "https://payhip.com/b/your-netflix-code",
+    "image": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1200&auto=format&fit=crop"
+  }
+]

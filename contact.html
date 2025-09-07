@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ht"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kontakte nou — DigiMart</title>
+<link rel="stylesheet" href="styles.css"><link rel="icon" href="assets/favicon.svg">
+</head><body><div class="container">
+  <nav class="nav"><div class="brand"><a href="index.html"><img src="assets/logo.svg" alt="DigiMart"></a></div><a class="btn" href="index.html">Retounen</a></nav>
+  <div class="hero" style="grid-template-columns:1fr">
+    <div class="panel">
+      <h2>Kontakte nou</h2>
+      <p>Ou ka voye nou yon mesaj depi paj sa a. Si ou vle resevwa kopi repons la, antre imel ou kòrèk.</p>
+      <form class="kicker" id="f">
+        <div style="flex:1">
+          <label class="small">Imèl ou</label>
+          <input style="width:100%;padding:12px;border-radius:10px;border:1px solid #1f2937;background:#0b1220;color:#e5e7eb" type="email" name="email" placeholder="ou@example.com" required>
+        </div>
+        <div style="flex:1">
+          <label class="small">Mesaj</label>
+          <textarea style="width:100%;padding:12px;border-radius:10px;border:1px solid #1f2937;background:#0b1220;color:#e5e7eb;height:100px" name="message" placeholder="Ekri mesaj ou..." required></textarea>
+        </div>
+        <button class="btn primary" type="submit">Voye</button>
+      </form>
+      <div class="small">Entegrasyon si ou vle: <b>EmailJS</b>. Ranplase script la ak ID ou yo (gade README).</div>
+    </div>
+  </div>
+</div>
+<script>
+document.getElementById('f').addEventListener('submit', function(e){
+  e.preventDefault();
+  alert('Fòm nan pare. Pou voye imèl otomatik, mete ID EmailJS ou jan li ekri nan README.md.');
+});
+</script>
+</body></html>

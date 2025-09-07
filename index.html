@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ht">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DigiMart — Pwodwi dijital, livrezon pa imel</title>
+  <link rel="icon" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="Vann kle lojisyèl, gift cards, templates & plis. Livrezon otomatik pa imèl.">
+</head>
+<body>
+  <div class="container">
+    <nav class="nav">
+      <div class="brand">
+        <img src="assets/logo.svg" alt="DigiMart">
+        <span class="badge"><span class="dot"></span> Livrezon imedya pa imel</span>
+      </div>
+      <div class="cta">
+        <a class="btn" href="contact.html">Kontakte nou</a>
+        <a class="btn primary" href="#store">Boutik</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div>
+        <div class="badge"><span class="dot"></span> 100% Dijital • Pa gen transpò • Pa gen douane</div>
+        <h1>Boutik dijital ou pou <span style="color:var(--brand)">kle & kòd</span> ki livre <i>pa imel sèlman</i>.</h1>
+        <p>Microsoft Office, VPN, templates Canva, gift cards, elatriye. Achte — resevwa imel — fini.</p>
+        <div class="kicker">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L20 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Pa bezwen kat bank etranje: nou ka aksepte <b>crypto</b> & <b>MonCash</b> atravè patnè yo (opsyonèl).</div>
+      </div>
+      <div class="panel">
+        <strong>Ki jan li mache?</strong>
+        <ul>
+          <li>Chwazi pwodwi a epi klike <b>Achte kounya</b>.</li>
+          <li>Fè peman sou Gumroad/Payhip oswa metòd ke ou mete.</li>
+          <li>Imèl ou resevwa kòd/fichye otomatikman.</li>
+        </ul>
+        <div class="notice small">Nòt: Ranplase lyen pwodwi yo ak pwòp lyen ou (Gumroad/Payhip/Stripe-crypto).</div>
+      </div>
+    </section>
+
+    <div class="marquee" aria-hidden="true">
+      🔐 Kle lojisyèl • 🎮 Kòd dijital • 🎨 Templates Canva • 🎧 Abonman • 🎁 Gift cards • 🌐 VPN • 🧰 Tools kreyatè
+    </div>
+
+    <section id="store">
+      <div class="filters">
+        <div class="search"><input id="search" placeholder="Rechèch: Office, VPN, Netflix, Canva…"></div>
+        <a class="btn" href="how-to-pay.html">Kijan pou peye?</a>
+        <a class="btn" href="refund.html">Règleman Ranbousman</a>
+      </div>
+      <div class="grid"></div>
+    </section>
+
+    <footer>
+      <div>
+        <strong>DigiMart</strong><br>
+        Boutik dijital • Livrezon pa imel sèlman<br>
+        <div class="legal">© <span id="y"></span> DigiMart. Tout dwa rezève.</div>
+      </div>
+      <div>
+        <strong>Legal</strong><br>
+        <a href="terms.html">Tèm Itilizasyon</a><br>
+        <a href="privacy.html">Politik Konfidansyalite</a><br>
+        <a href="refund.html">Ranbousman</a>
+      </div>
+      <div>
+        <strong>Èd</strong><br>
+        <a href="how-to-pay.html">Kijan pou peye?</a><br>
+        <a href="contact.html">Kontakte nou</a>
+      </div>
+    </footer>
+  </div>
+
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3 class="modal-title">Pwodwi</h3>
+        <button class="btn" onclick="closeModal()">Fèmen</button>
+      </div>
+      <div class="modal-body"></div>
+      <div class="modal-actions">
+        <a class="btn primary modal-buy" target="_blank" rel="noopener">Achte kounya</a>
+        <button class="btn" onclick="closeModal()">Fèmen</button>
+      </div>
+    </div>
+  </div>
+
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+  <script src="scripts.js"></script>
+</body>
+</html>
