@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="48" viewBox="0 0 200 48" role="img" aria-label="DigiMart logo">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="200" y2="48">
+      <stop offset="0" stop-color="#111827"/>
+      <stop offset="1" stop-color="#1F2937"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="48" rx="10" fill="url(#g)"/>
+  <g fill="#F9FAFB" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial">
+    <text x="16" y="31" font-size="20" font-weight="700">DigiMart</text>
+  </g>
+</svg>
