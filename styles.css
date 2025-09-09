@@ -106,3 +106,21 @@ footer a{color:#cbd5e1}
   }
 }
 /* === END PATCH === */
+
+
+/* === RIGHT + SCROLLABLE DROPDOWN PATCH (assistant) === */
+.nav .right{ margin-left:auto; display:flex; align-items:center; gap:10px; }
+.menu-wrap{ position:relative; margin-left:auto; }
+.container,.nav,.brand,.menu-wrap{ overflow:visible; }
+.dropdown{
+  position:absolute; right:0; left:auto; top:100%;
+  min-width:240px; max-height:70vh; overflow-y:auto;
+  overscroll-behavior:contain; -webkit-overflow-scrolling:touch;
+  z-index:70; text-align:right; transform-origin:top right;
+}
+.dropdown::-webkit-scrollbar{ width:8px } .dropdown::-webkit-scrollbar-thumb{ background:#1f2937; border-radius:8px }
+@media (max-width:640px){
+  .nav{ position:sticky; top:0; z-index:80 }
+  .dropdown{ position:fixed; top:56px; right:8px; left:auto; width:calc(100vw - 16px); max-height:calc(100vh - 64px); }
+}
+/* === END PATCH === */

@@ -90,7 +90,14 @@ function setupDropdown(){
   const btn = document.getElementById('menu-toggle');
   const dd = document.getElementById('menu-dropdown');
   if(!btn || !dd) return;
-  function close(){ dd.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+  function open(){ dd.classList.add('open'); btn.setAttribute('aria-expanded','true'); document.documentElement.classList.add('menu-open'); }
+  function close(){ dd.classList.remove('open'); btn.setAttribute('aria-expanded','false'); document.documentElement.classList.remove('menu-open'); }
+  btn.addEventListener('click', (e)=>{ e.stopPropagation(); dd.classList.contains('open') ? close() : open(); });
+  ['wheel','touchmove'].forEach(evt=> dd.addEventListener(evt, (e)=>{ e.stopPropagation(); }, {passive:true}));
+  document.addEventListener('click', (e)=>{ if(!dd.contains(e.target) && e.target!==btn) close(); });
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+  dd.addEventListener('click', (e)=>{ const t=e.target; if(t.tagName==='A'||t.tagName==='BUTTON') close(); });
+}
   btn.addEventListener('click', (e)=>{ e.stopPropagation(); dd.classList.toggle('open'); btn.setAttribute('aria-expanded', dd.classList.contains('open')?'true':'false'); });
   document.addEventListener('click', (e)=>{ if(!dd.contains(e.target) && e.target!==btn){ close(); } });
   document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
