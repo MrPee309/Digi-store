@@ -1,0 +1,44 @@
+
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Auth Test</title>
+<link rel="stylesheet" href="styles.css">
+</head><body>
+  <div class="container">
+    <nav class="nav"><div class="brand"><strong>Auth Test</strong></div>
+      <div class="right">
+        <button class="btn" id="login">Sign in</button>
+        <button class="btn" id="register">Register</button>
+        <button class="btn" id="logout" style="display:none">Sign out</button>
+        <div id="user" class="user" style="display:none;padding-left:8px"></div>
+      </div>
+    </nav>
+  </div>
+
+  <div class="modal" id="auth-modal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div class="modal-head"><h3>Account</h3><button class="btn" data-close-auth>Close</button></div>
+      <div class="panel" style="margin-bottom:12px">
+        <h4>Create an account</h4>
+        <form id="form-register">
+          <input class="select" name="name" placeholder="Full name" required style="width:100%;margin:6px 0">
+          <input class="select" name="email" type="email" placeholder="Email" required style="width:100%;margin:6px 0">
+          <input class="select" name="password" type="password" placeholder="Password (min 6)" required style="width:100%;margin:6px 0">
+          <button class="btn primary" type="submit" style="width:100%;margin-top:6px">Register</button>
+        </form>
+        <button class="btn" data-google-auth style="width:100%;margin-top:8px">Continue with Google</button>
+      </div>
+      <div class="panel">
+        <h4>Login</h4>
+        <form id="form-login">
+          <input class="select" name="email" type="email" placeholder="Email" required style="width:100%;margin:6px 0">
+          <input class="select" name="password" type="password" placeholder="Password" required style="width:100%;margin:6px 0">
+          <button class="btn primary" type="submit" style="width:100%;margin-top:6px">Login</button>
+        </form>
+        <button class="btn" data-google-auth style="width:100%;margin-top:8px">Continue with Google</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="firebase.js"></script>
+</body></html>
