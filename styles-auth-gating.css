@@ -1,0 +1,9 @@
+
+/* Auth gating styles */
+.is-disabled,
+[aria-disabled="true"]{
+  pointer-events: none;
+  opacity: .55;
+  cursor: not-allowed;
+  filter: grayscale(.3);
+}
